@@ -250,6 +250,24 @@ class ProxyFetcher(object):
             for ip in ips:
                 yield ip.strip()
 
+    @staticmethod
+    def freeProxy15():
+        urls = ['https://www.proxy-list.download/api/v1/get?type=socks4']
+        for url in urls:
+            r = WebRequest().get(url, timeout=10)
+            ips = re.findall(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}", r.text)
+            for ip in ips:
+                yield ip.strip()
+
+    @staticmethod
+    def freeProxy16():
+        urls = ['https://api.proxyscrape.com/?request=displayproxies&proxytype=all']
+        for url in urls:
+            r = WebRequest().get(url, timeout=10)
+            ips = re.findall(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}", r.text)
+            for ip in ips:
+                yield ip.strip()
+
 
 if __name__ == '__main__':
     p = ProxyFetcher()
